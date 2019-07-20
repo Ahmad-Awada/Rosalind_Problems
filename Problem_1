@@ -1,0 +1,51 @@
+//Problem 1: Counting DNA Nucleotide.
+//
+//A string is simply an ordered collection of symbols selected from some alphabet and formed into a word; the length of a string is the number of symbols that it contains.
+//An example of a length 21 DNA string (whose alphabet contains the symbols 'A', 'C', 'G', and 'T') is "ATGCTTCAGAAAGGTCTTACG."
+//
+//Given: A DNA string of length at most 1000 nt.
+//Return: Four integers (separated by spaces) counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in.
+
+#include <string>
+#include <iostream>
+using namespace std;
+int main() {
+	
+	cout << "Please input a sequence of base pairs without any space: ";
+    string str;
+	cin >> str;
+    cout << "Sequence: "<< str << "\n";
+    
+    //Declare counter variables for each nucleotide and one for the string length (l)
+    int A = 0, T = 0, G = 0, C = 0, l = 0;
+    
+    //Loop counts the nucleotide sequence length and the number of times each nucleotide appears
+    for(int i=0; str[i]; i++){
+    	l++;
+
+    	if (str[i] == 'A'){
+    		A++;
+    	}
+		if (str[i] == 'T'){
+			T++;
+		}
+		if (str[i] == 'G'){
+			G++;
+		}
+		if (str[i] == 'C'){
+			C++;
+		}
+    }
+
+    //Output sequence length and the number of purines and pyrimidines
+    cout << "Contains " << l << " nucleotides, of which " << G+A << " are purines and " << T+C << " are pyrimidines.\n";
+    //Output sequence length and the number of each nucleotide.
+    cout << "Contains the following amount of each amino acid. \n A: " << A << "\n C: " << C << "\n G: " << G << "\n T: " << T << "\n";
+
+    //Check if the data contained any characters except for ATGC
+    if (A+C+G+T != l){
+    	cout << "The string entered contains characters other than ATCG. Please check your input. \n";
+    }
+
+	return 0;
+}
