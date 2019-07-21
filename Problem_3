@@ -1,0 +1,39 @@
+#include <string>
+#include <iostream>
+using namespace std;
+int main() {
+	cout << "Please input a sequence of base pairs without any space: ";
+	string str;
+	cin >> str;
+
+    //Get the length of the sequence
+    int len = str.length();
+
+	//Make a copy of the sequence on another variable
+	string str0;
+	str0 = str;
+
+	//Output DNA sequence
+    cout << "DNA Sequence: "<< str << "\n";
+
+    //Loop reads values starting from the back from one copy and edits the other copy starting at the start.
+    for(int i=0; i < len; i++){
+    	if (str0[len-1-i] == 'T'){
+			str[i] ='A';
+		}
+		if (str0[len-1-i] == 'A'){
+			str[i] ='T';
+		}
+		if (str0[len-1-i] == 'C'){
+			str[i] ='G';
+		}
+		if (str0[len-1-i] == 'G'){
+			str[i] ='C';
+		}
+    }
+
+    //Output transcribed RNA of input DNA sequence
+    cout << "Reverse complement of DNA sequence: "<< str << "\n";
+
+	return 0;
+}
