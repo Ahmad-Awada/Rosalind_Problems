@@ -1,0 +1,35 @@
+//Problem 2: Transcribing DNA into RNA.
+//
+//Given: Three positive integers k, m, and  n, representing a population containing organisms: individuals are homozygous dominant for a factor, are heterozygous, and
+//are homozygous recessive.
+//Return: The probability that two randomly selected mating organisms will produce an individual possessing a dominant allele (and thus displaying the dominant phenotype). Assume that any two organisms can mate.
+
+#include <string>
+#include <iostream>
+using namespace std;
+int main() {
+	cout << "Please input a sequence of base pairs without any space: ";
+    string str;
+    cin >> str;
+    int A = 0, T = 0, G = 0, C = 0, l = 0;
+
+	//Output DNA sequence
+    cout << "DNA Sequence: "<< str << "\n";
+
+    //Loop counts the sequence length and the number of times each nucleotide appears
+    for(int i=0; str[i]; i++){
+		if (str[i] == 'T'){
+			str[i] ='U';
+		}
+    }
+
+    //Output transcribed RNA of inputted DNA sequence
+    cout << "Transcribed RNA Sequence: "<< str << "\n";
+
+    //Check if the data contained any characters except for ATGC
+    if (A+C+G+T != l){
+    	cout << "The string entered contains characters other than ATCG. Please check your input. \n";
+    }
+    
+	return 0;
+}
