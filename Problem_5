@@ -1,0 +1,27 @@
+//Problem 5: Rabbits and Recurrence Relations.
+//
+//Given: A DNA string of length at most 1000 nt.
+//Return: Four integers (separated by spaces) counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in.
+
+#include <iomanip>
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, k, i;
+	cout << "Please input the number of months (n): ";
+	cin >> n;
+	cout << "Please input the number of offsprings per couple (k): ";
+	cin >> k;
+
+	double rabbits[n] = {0};
+	rabbits[0] = 1;
+	rabbits[1] = 1;
+
+	for (i=2; i<n; i++){
+		//Multiplying the standard formula by k
+		rabbits[i] = rabbits[i-1] + k*rabbits[i-2];
+		cout << fixed << setprecision(0) << rabbits[i];
+		cout << "\n";
+	}
+}
