@@ -1,0 +1,35 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main() {
+	float total, k, m, n;
+	float pr, pr_kk, pr_km, pr_kn, pr_mm, pr_mn, pr_nn;
+	cout << "Please input a value for k: ";
+	cin >> k;
+	cout << "Please input a value for m: ";
+	cin >> m;
+	cout << "Please input a value for n: ";
+	cin >> n;
+
+	total = k + m + n;
+
+	//Probabilities of two mates pairing randomly for each genotype
+	pr_kk = k/total*(k-1)/(total-1) ;
+
+	pr_km = k/total*m/(total-1) + m/total*k/(total-1);
+
+	pr_kn = k/total*n/(total-1) + n/total*k/(total-1);
+
+	pr_mm = m/total*(m-1)/(total-1) ;
+
+	pr_mn = n/total*m/(total-1) + m/total*n/(total-1);
+
+	pr_nn = n/total*(n-1)/(total-1);
+
+	//Probability of random offspring having at least one dominant allele
+	pr = pr_kk*1 + pr_km*1 + pr_kn*1 + pr_mm*0.75 + pr_mn*0.5 + pr_nn*0;
+
+    cout << "\nProbability of random offspring having a dominant allele: "<< pr << endl;
+	return 0;
+}
