@@ -1,0 +1,71 @@
+//Problem 6: Computing GC Content.
+//
+//Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
+//Return: The ID of the string having the highest GC-content, followed by the GC-content of that string. 
+//        Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated.
+
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <iostream>
+using namespace std;
+
+int main() {
+	vector<string> str, ID;
+	vector<double> gc_pc;
+	string temp;
+	ifstream txt("FASTA.txt");
+	int i, j, ith=0;
+	double A=0, T=0, G=0, C=0;
+	double total, tempn, size;
+
+	//Assigns each line from the text file to a string in a vector
+	if(txt.is_open()){
+		while(getline(txt, temp)){
+			str.push_back(temp);
+		}
+	}
+
+	//Counts the number of each nucleotide in the current sequence
+  size = str.size();
+	for(i=0; i < size; i++){
+		if (str[i][0] != '>') {
+			for(j=0; str[i][j]; j++){
+				if (str[i][j] == 'A'){
+					A++;
+				}
+				if (str[i][j] == 'T'){
+					T++;
+				}
+				if (str[i][j] == 'G'){
+					G++;
+				}
+				if (str[i][j] == 'C'){
+					C++;
+				}
+			}
+		}
+		if (str[i][0] == '>' || i == size-1) {
+			if (str[i][0] == '>'){ //Save ordered sequence IDs in a vector
+				ID.push_back(str[i]);
+			}
+			if (i != 0){
+				total = A+C+G+T;
+				tempn = (G+C)/total*100; //Calculate GC percentage
+				gc_pc.push_back(tempn); //Save ordered GC percentage values of sequences inside a vector
+				A = C = G = T = 0; //Reset ACTG counters for next sequence
+			}
+		}
+	}
+  
+	size = gc_pc.size();
+	for(i=0; i < size; i++){
+		cout << ID[i] << " -- GC content: " << gc_pc[i] << "%" << endl;//Outputs the ID and GC content of a sequence
+		if(i>0 && gc_pc[i+1] > gc_pc[ith]){ //The position of the highest value iterated through is carried on starting from position 0
+			ith = i+1;
+		}
+	}
+  
+	cout << "\n____\nHighest GC content\n" << ID[ith] << " -- GC content: "<< gc_pc[ith] << "%"  << endl; //Outputs the ID and % for the highest GC containing sequence
+}
