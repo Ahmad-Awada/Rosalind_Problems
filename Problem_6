@@ -68,4 +68,5 @@ int main() {
 	}
   
 	cout << "\n____\nHighest GC content\n" << ID[ith] << " -- GC content: "<< gc_pc[ith] << "%"  << endl; //Outputs the ID and % for the highest GC containing sequence
+	return 0;
 }
