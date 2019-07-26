@@ -28,7 +28,7 @@ int main() {
 	}
 
 	//Counts the number of each nucleotide in the current sequence
-  size = str.size();
+  	size = str.size();
 	for(i=0; i < size; i++){
 		if (str[i][0] != '>') {
 			for(j=0; str[i][j]; j++){
