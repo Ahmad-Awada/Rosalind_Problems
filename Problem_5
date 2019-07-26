@@ -19,8 +19,7 @@ int main() {
 	rabbits[1] = 1;
 
 	for (i=2; i<n; i++){
-		//Multiplying the standard formula by k
-		rabbits[i] = rabbits[i-1] + k*rabbits[i-2];
+		rabbits[i] = rabbits[i-1] + k*rabbits[i-2]; //Multiplying the standard formula by k
 		cout << fixed << setprecision(0) << rabbits[i];
 		cout << "\n";
 	}
