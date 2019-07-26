@@ -24,4 +24,5 @@ int main() {
 		cout << fixed << setprecision(0) << rabbits[i];
 		cout << "\n";
 	}
+	return 0;
 }
