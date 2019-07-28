@@ -1,0 +1,129 @@
+//Problem 7: Translating RNA into Protein.
+//
+//Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
+//Return: The protein string encoded by s
+
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+	string str, str0;
+	vector<string> prot(21), rna;
+	vector<int> protseq;
+	cout << "Please input a sequence of base pairs without any spaces: ";
+	cin >> str;
+
+	prot[0] = "\n";
+	prot[1] = "F";
+	prot[2] = "L";
+	prot[3] = "I";
+	prot[4] = "M";
+	prot[5] = "V";
+	prot[6] = "S";
+	prot[7] = "P";
+	prot[8] = "T";
+	prot[9] = "A";
+	prot[10] = "Y";
+	prot[11] = "H";
+	prot[12] = "Q";
+	prot[13] = "N";
+	prot[14] = "K";
+	prot[15] = "D";
+	prot[16] = "E";
+	prot[17] = "C";
+	prot[18] = "W";
+	prot[19] = "R";
+	prot[20] = "G";
+
+	for(size_t i=0; i<str.size(); i=i+3){
+		str0 = string() + str[i] + str[i+1] + str[i+2];
+		rna.push_back(str0);
+	}
+
+	//This loops will iterate through a vector of RNA triplets. Bases that encode fewer unique residues are attempted first
+	//to more rapidly exhaust possible protein outcomes for faster computation
+	//NB: This assumes that bases form RNA codons through random combinations
+	for(size_t i=0; i<rna.size(); i++) {
+		if(rna[i][1] == 'C'){//If second base is C
+			if(rna[i][0] == 'U') {
+				protseq.push_back(6);
+			} else if(rna[i][0] == 'C'){
+				protseq.push_back(7);
+			} else if(rna[i][0] == 'A'){
+				protseq.push_back(8);
+			} else {
+				protseq.push_back(9);
+			}
+		} else if(rna[i][1] == 'U'){
+			if(rna[i][0] == 'U' || rna[i][0] == 'C'){
+				if(rna[i] == "UUU" || rna[i] == "UUC"){
+					protseq.push_back(1);
+				} else {
+					protseq.push_back(2);
+				}
+			} else if(rna[i][0] == 'G'){
+				protseq.push_back(5);
+			} else if(rna[i] == "AUG"){
+				protseq.push_back(4);
+			} else {
+				protseq.push_back(3);
+			}
+		} else if(rna[i][1] == 'G'){//If second base is G
+			if(rna[i][0] == 'A' || rna[i][0] == 'C'){
+				if(rna[i] == "AGU" || rna[i] == "AGC"){
+					protseq.push_back(6);
+				} else {
+					protseq.push_back(19);
+				}
+			} else if(rna[i][0] == 'G'){
+				protseq.push_back(20);
+			} else if(rna[i][0] == 'U'){
+				if(rna[i][2] == 'A'){
+					protseq.push_back(0);
+				} else if(rna[i][2] == 'G'){
+					protseq.push_back(18);
+				} else {
+					protseq.push_back(17);
+				}
+			}
+		} else if(rna[i][1] == 'A'){//If second base is A
+			if(rna[i][0] == 'G'){
+				if(rna[i][2] == 'U' || rna[i][2] == 'C'){
+					protseq.push_back(15);
+				} else {
+					protseq.push_back(16);
+				}
+			} else if(rna[i][0] == 'U'){
+				if(rna[i][2] == 'A' || rna[i][2] == 'G'){
+					protseq.push_back(0);
+				} else {
+					protseq.push_back(10);
+				}
+			} else if(rna[i][0] == 'C') {
+				if(rna[i][2] == 'U' || rna[i][2] == 'C'){
+					protseq.push_back(11);
+				} else {
+					protseq.push_back(12);
+				}
+			} else if(rna[i][0] == 'A'){
+				if(rna[i][2] == 'U' || rna[i][2] == 'C'){
+					protseq.push_back(13);
+				} else {
+					protseq.push_back(14);
+				}
+			}
+		}
+	}
+
+	//Output residues in a single protein sequence
+	for(size_t i=0; i<rna.size(); i++){
+		int o = protseq[i];
+		cout << prot[o];
+	}
+
+	cout << endl;
+	return 0;
+}
