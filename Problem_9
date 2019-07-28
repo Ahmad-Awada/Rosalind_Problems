@@ -1,0 +1,30 @@
+//Problem 9: Counting Point Mutations.
+//
+//Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
+//Return: The Hamming distance dH(s, t)    
+
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+	string str0, str1;
+	int dist=0;
+
+	cout << "Please input the first sequence: " << endl;
+	cin >> str0;
+	cout << "Please input the second sequence: " << endl;
+	cin >> str1;
+
+	for(size_t i=0; str0[i]; i++){
+		if(str0[i] != str1[i]){
+			dist++;
+		}
+	}
+
+	cout << "The Hamming distance is: " << dist << endl;
+	return 0;
+}
