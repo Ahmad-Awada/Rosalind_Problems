@@ -1,0 +1,28 @@
+//Problem 8: Finding a Motif in DNA.
+//
+//Given: Two DNA strings s and t (each of length at most 1 kbp).
+//Return: All locations of t as a substring of s.
+
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+	string substr, str;
+
+	cout << "Please input a sequence of base pairs without any spaces: " << endl;
+	cin >> str;
+	cout << "Please input the sub sequence you would like to detect: " << endl;
+	cin >> substr;
+
+	size_t i = str.find(substr);
+	while(i != string::npos){
+		cout << i+1 << endl;
+		i = str.find(substr, i+1);
+	}
+
+	return 0;
+}
