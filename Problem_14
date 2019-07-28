@@ -1,0 +1,38 @@
+//Problem 14: Calculating Protein Mass.
+//
+//Given: A protein string P of length at most 1000 aa.
+//Return: The total weight of P. Consult the monoisotopic mass table.
+
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+	string temp,str0;
+
+	cout << "Please input a sequence of base pairs without any spaces: ";
+	cin >> str0;
+
+	vector<string> str;
+	ifstream txt("C:\\Users\\sil\\Desktop\\monotable.txt"); //Table containing monoisotopic mass of each unique residue (e.g. A 71.03711)
+	double weight=0;
+
+	while(txt >> temp){
+		str.push_back(temp);
+	}
+
+	//When a residue matches its letter in the table, the next line containing its monoisotopic weight is converted to double and added to the total weight.
+	for(size_t i=0; i<str0.size(); i++){
+		for(size_t j=0; j<str.size(); j = j+2){
+			if(str0[i] == str[j][0]){
+				weight += stod(str[j+1]);
+			}
+		}
+	}
+
+	cout << fixed << weight << endl;
+	return 0;
+}
