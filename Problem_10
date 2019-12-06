@@ -1,0 +1,37 @@
+#include <string>
+#include <iostream>
+using namespace std;
+int main() {
+	float total=0, carry=0, pr[6], list[6];
+	int o=0;
+	cout << "Please input the number of couples with genotypes AA-AA, AA-Aa, Aa-Aa, Aa-Aa, Aa-aa and aa-Aa in this order with each number separated by a space couples: " << endl;
+	do {
+	   cin >> list[o];
+	   o++;
+	}
+	while(o<6);
+
+	//Probabilities of an offspring having a dominant allele in their genotype
+	pr[0] = 1;
+
+	pr[1] = 1;
+
+	pr[2] = 1;
+
+	pr[3] = 0.75;
+
+	pr[4] = 0.5;
+
+	pr[5] = 0;
+
+	for(size_t i=0; i< 6; i++){
+		total = total + list[i];
+	}
+
+	for(size_t i=0; i < 6; i++){
+		carry = carry+2*(list[i]*pr[i]);
+	}
+
+    cout << "\nProbability of random offspring having a dominant allele: " << fixed << carry << endl;
+	return 0;
+}
