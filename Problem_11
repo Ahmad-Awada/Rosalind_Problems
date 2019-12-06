@@ -1,0 +1,23 @@
+n = int(input("Please input the number of months (n): "))
+k = int(input("Please input the number of offspring pairs per couple (k): "))
+d = int(input("Please input the number of months rabbits live for (d): "))
+
+rabbits = [0] * d
+rabbits[0] = 1
+
+
+for i in range(0,n):
+    #reset and calculate the sum of all mature rabbits
+    sum1 = 0;
+    for j in range(1,d):
+        sum1 = sum1 + rabbits[j]
+    
+    liverabbits = sum1 + rabbits[0]
+    print("Month " + str(i+1) + "\nTotal Rabbits: " + str(liverabbits) + "\nMature Rabbits: " + str(sum1) + "\nBaby Rabbits: " + str(rabbits[0]) + "\n")
+
+    #shift the age of rabbits by 1 month
+    for j in range(d-1, 0, -1):
+        rabbits[j] = rabbits[j-1]    
+    
+    #calculate the number of offsprings based on the fertility and number of mature rabbits
+    rabbits[0] = sum1*k;
